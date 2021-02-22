@@ -1,3 +1,4 @@
+import Cookie from 'js-cookie';
 import {
   SIGN_IN_LOADING,
   SIGN_IN_SUCCESS,
@@ -9,8 +10,8 @@ import {
   SIGN_IN_SET_PASSWORD,
 } from "../types";
 
-const getLocalToken = () => {
-  const token = localStorage.getItem('token');
+const getToken = () => {
+  const token = Cookie.get('token');
   if (token) {
     return true;
   }
@@ -19,7 +20,7 @@ const getLocalToken = () => {
 
 export const auth = (
   state = {
-    auth: getLocalToken() || false,
+    auth: getToken() || false,
     username: '',
     password: '',
   },

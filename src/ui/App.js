@@ -1,24 +1,30 @@
-import { Provider } from "react-redux";
-
-import store from "../domains/redux/store";
 import Topbar from "./Topbar";
-import Pagination from "./Pagination/Pagination";
-import AuthDialog from "./modals/AuthDialog";
-import CreateTaskDialog from "./modals/CreateTaskDialog";
-import TaskList from "./TaskList/TaskList";
-import EditTaskDialog from './modals/EditTaskDialog';
+import Pagination from "./Pagination";
+import TaskList from "./TaskList";
 import "./App.css";
+import { useSelector } from "react-redux";
+import Modal from "./Modal";
+import { openCreateTaskDialog } from "../domains/redux/actions/addTask";
+import { openEditDialog } from "../domains/redux/actions/editTask";
+import { openSignInDialog } from "../domains/redux/actions/auth";
+import AuthForm from "./Forms/AuthForm";
+import CreateTaskForm from "./Forms/CreateTaskForm";
+import EditTaskForm from "./Forms/EditTaskForm";
 
 function App() {
+  const isAuth = useSelector(state => state.auth.auth);
+  const showAuthDialog = useSelector(state => state.auth.showDialog);
+  const showCreateTaskDialog = useSelector(state => state.addTask.showDialog);
+  const showEditTaskDialog = useSelector(state => state.editTask.showDialog);
   return (
-    <Provider store={store()}>
+    <>
       <Topbar />
       <TaskList />
       <Pagination />
-      <AuthDialog />
-      <CreateTaskDialog />
-      <EditTaskDialog />
-    </Provider>
+      { !isAuth && <Modal title='Auth' showDialog={showAuthDialog} onClose={openSignInDialog} child={<AuthForm />}/> }
+      <Modal title='Add task' showDialog={showCreateTaskDialog} onClose={openCreateTaskDialog} child={<CreateTaskForm />}/>
+      { isAuth && <Modal title='Edit task' showDialog={showEditTaskDialog} onClose={openEditDialog} child={<EditTaskForm />}/> }
+    </>
   );
 }
 

@@ -1,9 +1,9 @@
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks } from "../../domains/redux/actions";
+import { setPage } from "../../domains/redux/actions/tasks";
 import "./Pagination.css";
 
-export default function Pagination(props) {
+export default function Pagination() {
   const { total_task_count } = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
@@ -11,8 +11,9 @@ export default function Pagination(props) {
     let selected = data.selected;
     let offset = Math.ceil(selected);
 
-    dispatch(fetchTasks({ page: offset }));
+    dispatch(setPage(offset));
   };
+
   return (
     <div className="center">
       <ReactPaginate

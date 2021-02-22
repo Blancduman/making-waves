@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 const API_BASE = "https://uxcandy.com/~shapoval/test-task-backend/v2";
 const DEVELOPER_NAME = `developer=Name`;
 
@@ -16,7 +18,7 @@ export default class TestAPI {
 
       return json;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -34,11 +36,9 @@ export default class TestAPI {
 
       const json = await response.json();
 
-      console.log(json);
-
       return json;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -57,7 +57,7 @@ export default class TestAPI {
 
       return json;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -66,7 +66,8 @@ export default class TestAPI {
       const formData = new FormData();
       text && formData.append("text", text);
       status && formData.append("status", status);
-      formData.append("token", localStorage.getItem("token"));
+      const token = Cookies.get('token');
+      formData.append("token", token);
 
       const response = await fetch(
         `${API_BASE}/edit/${id}/?${DEVELOPER_NAME}`,
@@ -80,7 +81,7 @@ export default class TestAPI {
       
       return json;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

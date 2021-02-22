@@ -3,6 +3,7 @@ import {
   FETCH_TASKS_ERROR,
   FETCH_TASKS_SUCCESS,
   TASKS_SET_PAGE,
+  EDIT_TASK_SUCCESS,
 } from "../types";
 
 export const tasks = (
@@ -28,13 +29,14 @@ export const tasks = (
       return {
         tasks: action.payload.tasks,
         total_task_count: action.payload.total_task_count,
+        page: action.payload.page,
       };
     }
 
     case FETCH_TASKS_ERROR: {
       return {
-        tasks: state.tasks,
-        total_task_count: state.total_task_count,
+        ...state,
+        isLoading: false,
         error: action.payload,
       };
     }
@@ -43,6 +45,24 @@ export const tasks = (
       return {
         ...state,
         page: action.payload,
+      };
+    }
+
+    case EDIT_TASK_SUCCESS: {
+      const tasks = state.tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return {
+            ...task,
+            text: action.payload.text,
+            status: action.payload.status,
+          };
+        }
+        return task;
+      });
+
+      return {
+        ...state,
+        tasks,
       };
     }
 
