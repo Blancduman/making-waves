@@ -108,9 +108,9 @@ export default function EditTaskForm() {
         <input
           type="submit"
           value="Submit"
-          disabled={!isLoading || (text && text !== defaultTaskData.text) || (status !== defaultTaskData.status)}
+          disabled={!isLoading || !text}
           style={
-            !isLoading || (text && text !== defaultTaskData.text) || (status !== defaultTaskData.status) ? {} : { backgroundColor: "grey" }
+            !isLoading || !text ? { backgroundColor: "grey" } : {}
           }
         />
       </div>
