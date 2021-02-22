@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   editTask,
@@ -10,9 +9,6 @@ export default function EditTaskForm() {
   const { text, status, id, username, email, isLoading, error } = useSelector(
     (state) => state.editTask
   );
-  const [defaultTaskData] = useState({
-    text, status,
-  });
   const dispatch = useDispatch();
 
   const onChangeText = ({ target: { value } }) => dispatch(editTastSetText(value));
@@ -108,9 +104,9 @@ export default function EditTaskForm() {
         <input
           type="submit"
           value="Submit"
-          disabled={!isLoading || !text}
+          disabled={isLoading || !text}
           style={
-            !isLoading || !text ? { backgroundColor: "grey" } : {}
+            isLoading || !text ? { backgroundColor: "grey" } : {}
           }
         />
       </div>
