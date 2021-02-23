@@ -35,7 +35,7 @@ export const signIn = (username, password) => async (dispatch) => {
   if (response.status === "ok") {
     Cookies.set("token", response.message.token, {
       expires: 1,
-      secure: false,
+      secure: true,
       sameSite: "Strict",
     });
     dispatch({
