@@ -57,6 +57,7 @@ export const auth = (
       return {
         ...state,
         showDialog: action.payload,
+        error: null,
       };
     }
 

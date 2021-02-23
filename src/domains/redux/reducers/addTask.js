@@ -41,11 +41,14 @@ export const addTask = (
 
     case ADD_TASK_SUCCESS: {
       return {
+        ...state,
         username: "",
         email: "",
         text: "",
         status: "",
         success: true,
+        isLoading: false,
+        showDialog: true,
       };
     }
 
@@ -54,11 +57,12 @@ export const addTask = (
         ...state,
         isLoading: false,
         error: action.payload,
+        showDialog: true,
       };
     }
 
     case ADD_TASK_SET_USERNAME: {
-      const { error, ...oldState } = state;
+      const { error, success, ...oldState } = state;
       return {
         ...oldState,
         username: action.payload,
@@ -66,7 +70,7 @@ export const addTask = (
     }
 
     case ADD_TASK_SET_EMAIL: {
-      const { error, ...oldState } = state;
+      const { error, success, ...oldState } = state;
       return {
         ...oldState,
         email: action.payload,
@@ -74,7 +78,7 @@ export const addTask = (
     }
 
     case ADD_TASK_SET_TEXT: {
-      const { error, ...oldState } = state;
+      const { error, success, ...oldState } = state;
       return {
         ...oldState,
         text: action.payload,
@@ -93,6 +97,8 @@ export const addTask = (
       return {
         ...state,
         showDialog: action.payload,
+        error: null,
+        success: false,
       };
     }
 

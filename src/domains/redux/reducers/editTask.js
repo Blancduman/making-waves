@@ -77,6 +77,7 @@ export const editTask = (
           email,
           text,
           status,
+          error: null,
         };
       } else {
         return {

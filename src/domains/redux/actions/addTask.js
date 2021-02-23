@@ -8,6 +8,7 @@ import {
   ADD_TASK_SET_EMAIL,
   ADD_TASK_SET_TEXT,
 } from "../types";
+import { fetchTasks } from "./tasks";
 
 const api = new TestAPI();
 
@@ -35,6 +36,7 @@ export const createTask = (username, email, text) => async (
     dispatch({
       type: ADD_TASK_SUCCESS,
     });
+    dispatch(fetchTasks(getState().tasks));
   } else {
     dispatch({
       type: ADD_TASK_ERROR,

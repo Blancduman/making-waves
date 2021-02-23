@@ -22,14 +22,16 @@ export const tasks = (
       return {
         ...oldState,
         isLoading: true,
+        ...action.payload,
       };
     }
 
     case FETCH_TASKS_SUCCESS: {
       return {
+        ...state,
         tasks: action.payload.tasks,
         total_task_count: action.payload.total_task_count,
-        page: action.payload.page,
+        isLoading: false,
       };
     }
 

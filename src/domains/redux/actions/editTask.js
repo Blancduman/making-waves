@@ -59,6 +59,10 @@ export const editTask = (id, text, status) => async (dispatch, getState) => {
         dispatch({
           type: SIGN_OUT,
         });
+        dispatch({
+          type: EDIT_TASK_OPEN_DIALOG,
+          payload: {showDialog: false,}
+        });
       }, 3000);
     }
     dispatch({

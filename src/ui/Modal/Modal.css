@@ -99,7 +99,7 @@ label {
   display: inline-block;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   background-color: #4caf50;
   color: white;
   margin: 20px 30px 0;
@@ -110,12 +110,20 @@ input[type="submit"] {
   float: right;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
   background-color: #45a049;
 }
 
 .error-message {
   color: #cc0033;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 5px 0 0;
+}
+
+.success-message {
+  color: #45a049;
   display: inline-block;
   font-size: 12px;
   line-height: 15px;

@@ -18,6 +18,11 @@ export const fetchTasks = ({ sort_field, sort_direction, page }) => async (
   }
   dispatch({
     type: FETCH_TASKS_LOADING,
+    payload: {
+      sort_field,
+      sort_direction,
+      page,
+    },
   });
   const response = await api.getTaskList({
     sort_field,
@@ -29,7 +34,7 @@ export const fetchTasks = ({ sort_field, sort_direction, page }) => async (
     const { tasks, total_task_count } = response.message;
     dispatch({
       type: FETCH_TASKS_SUCCESS,
-      payload: { tasks, total_task_count, page },
+      payload: { tasks, total_task_count },
     });
   } else {
     dispatch({
